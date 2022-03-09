@@ -4,7 +4,7 @@
     stages {
         stage('build') {
             steps {
-                sh 'sudo mvn verify sonar:sonar'
+                sh 'sudo su mvn verify sonar:sonar'
             }
         }  
       }
