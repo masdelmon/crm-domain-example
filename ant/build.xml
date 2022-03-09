@@ -1,0 +1,146 @@
+<project name="crm-domain-example" basedir=".." default="create-sonargraph-report">
+    
+    <property name="src" location="./src" />
+    <property name="src.config" value="${src}/config" />
+    <property name="src.java" value="${src}/java" />
+    <property name="src.java-test" value="${src}/java-test" />
+    
+    <property name="target" location="./target.ant" />
+    <property name="target.cls" location="${target}/cls" />
+    
+	<property name="version" value="8.7.0"/>
+	
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar" />
+    </path>
+    
+    <!-- mandatory properties -->
+<!-- MODIFY THIS -->
+	<!--
+    <property name="sonargraph.build.installation" location="D:/02_programs/SG8/localBuild/SonargraphBuild-8.6.1.111_2015-10-26" />
+    -->
+	<!-- Java Test Project -->
+    <property name="sonargraph.systemDirectory" value="${basedir}/../step6_crm-domain-example.sonargraph"/>
+	<property name="sonargraph.virtualModel" value="Modifiable.vm"/>
+	<property name="sonargraph.reportDirectory" value="${basedir}/_temp" />
+    
+  <!-- optional properties -->
+	<!-- If no activation code is specified, a license file is expected to exist. Check the documentation for its location -->
+	<property name="sonargraph.activationCode" value="36E2-0F3E-643F-B4F2" />
+    
+	<!-- possible values (one or several): Java, CSharp, CPlusPlus -->
+	<property name="sonargraph.languages" value="Java"/>
+	
+	<!-- possible values: standard (default), full -->
+	<property name="sonargraph.reportType" value="standard"/>
+
+	<!-- possible values (comma separated): html (default), xml -->
+	<property name="sonargraph.reportFormat" value="xml, html"/>
+    <property name="sonargraph.reportFileName" value="CRM-Sonargraph-Report"/>
+    <property name="sonargraph.proxyHost" value="" />
+    <property name="sonargraph.proxyPort" value="" />
+    <property name="sonargraph.proxyUsername" value="" />
+    <property name="sonargraph.proxyPassword" value="" />
+	
+	<!-- possible values: off, error, warn, info (default), debug, trace, all -->
+    <property name="sonargraph.logLevel" value="warn" /> 
+    
+  <!-- task definition -->
+    <!--
+	<taskdef name="sonargraphBuild" classname="com.hello2morrow.sonargraph.build.client.ant.SonargraphReportTask">
+        <classpath>
+            <fileset dir="${sonargraph.build.installation}/plugins">
+                <include name="org.eclipse.osgi_3.1*.jar" />
+            </fileset>
+        	<fileset dir="${sonargraph.build.installation}/client" includes="*.jar" />
+        </classpath>
+    </taskdef>
+    -->
+    
+<!-- MODIFY THIS -->    
+    <property name="sonar.anttask.dir" location="D:/07_Software/sonar-ant-task-2.2" />
+    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+        <classpath path="${sonar.anttask.dir}/sonar-ant-task-2.2.jar" />
+    </taskdef>
+    
+    <!-- project specific targets -->
+    <target name="clean">
+        <delete dir="${target}"/>
+        <delete dir="${sonargraph.reportDirectory}"/>
+    </target>
+        
+    <target name="compile" depends="clean">
+        <mkdir dir="${target.cls}"/>
+        <javac destdir="${target.cls}" debug="on" failonerror="true">
+            <src path="${src.java}" />
+            <src path="${src.java-test}" />
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+	
+	<target name="dist" depends="compile">
+		<jar destfile="${target}/crm-domain-example-${version}.jar" basedir="${target.cls}"/>
+	</target>
+    
+    <!-- create report -->
+    <target name="create-sonargraph-report" description="Creates an XML report with SonargraphBuild">
+        <echo message="Using SonargraphBuild installation: ${sonargraph.build.installation}" />
+        <sonargraphBuild 
+        	languages="${sonargraph.languages}"
+        	activationCode="${sonargraph.activationCode}"
+            virtualModel="${sonargraph.virtualModel}"
+            installationDirectory="${sonargraph.build.installation}"
+            systemDirectory="${sonargraph.systemDirectory}"
+            reportDirectory="${sonargraph.reportDirectory}"
+            reportType="${sonargraph.reportType}"
+            reportFormat="${sonargraph.reportFormat}"
+            proxyHost="${sonargraph.proxyHost}" 
+            proxyPort="${sonargraph.proxyPort}" 
+            proxyUsername="${sonargraph.proxyUsername}"
+            proxyPassword="${sonargraph.proxyPassword}" 
+            logLevel="${sonargraph.logLevel}">
+            
+        	<!-- optional failSet element -->
+            <failSet failOnEmptyWorkspace="false"><!-- defaults: failOnEmtpyWorkspace="true"-->
+                <!-- mandatory attributes of filter -->
+                <!--     issueType=<issue short name>, any --><!-- check for issueType on Properties View -->
+                
+                <!-- optional attributes of filter -->
+                <!--     severity=error, warning, info, none, any (default) -->
+                <!--     resolution=task, ignore, any, none (default) -->
+                
+                <include issueType="any" severity="error"/> 
+                <exclude issueType="ScriptCompilationError"/>
+                <!-- example for script created issue -->
+                <!-- include issueType="Supertype uses subtype"/ -->
+                <!-- include issueType="ArchitectureViolation" resolution="none"/ -->
+                <include issueType="any" severity="warning"/>
+                <exclude issueType="ThresholdViolation"/>
+            </failSet>
+        </sonargraphBuild>
+    </target>
+    
+    <property name="sonar.projectKey" value="com.hello2morrow:crm-domain-example"/>
+    <property name="sonar.projectName" value="crm-domain-example" />
+    <property name="sonar.projectVersion" value="0.1-SNAPSHOT" />
+    <property name="sonar.language" value="java" />
+    <property name="sonar.sources" value="${src.java}" />
+    <property name="sonar.binaries" value="${target.cls}" />
+    <property name="sonarqube.sonargraph.report.path" value="${sonargraph.reportDirectory}/${sonargraph.reportFileName}.xml" />
+        
+    
+    <target name="sonarqube" description="Run SonarQube analysis" depends="compile">
+        <sonargraphBuild 
+            languages="${sonargraph.languages}"
+        	activationCode="${sonargraph.activationCode}"
+        	virtualModel="${sonargraph.virtualModel}"
+            installationDirectory="${sonargraph.build.installation}"
+            systemDirectory="${sonargraph.systemDirectory}"
+            reportDirectory="${sonargraph.reportDirectory}"
+            reportFileName="${sonargraph.reportFileName}"
+            reportFormat="XML"
+            logLevel="${sonargraph.logLevel}"/>
+
+        <sonar:sonar xmlns:sonar="antlib:org.sonar.ant"/>
+    </target>
+</project>

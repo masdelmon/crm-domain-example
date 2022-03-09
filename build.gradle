@@ -1,0 +1,51 @@
+plugins {
+    id "java"
+    id "com.hello2morrow.sonargraph" version "10.4.1.1"
+}
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['./src/java']
+        }
+    }
+}
+
+dependencies {
+    compile 'log4j:log4j:1.2.9'
+    testCompile 'junit:junit:3.8.1'
+}
+
+sonargraphReport {
+    activationCode = "36E2-0F3E-643F-B4F2"
+    systemDirectory = "../step7_crm-domain-example.sonargraph"
+    autoUpdate = true
+    logLevel = "info"
+    prepareForSonarQube = true
+    //qualityModelFile = "Sonargraph:Java.sgqm"  //internal quality model of Sonargraph
+    failSet {
+        failOnEmptyWorkspace = true
+        include(issueType: "ArchitectureViolation", severity: "error", resolution: "none")
+    }
+}
+
+sonargraphDynamicReport {
+    activationCode = "36E2-0F3E-643F-B4F2"
+    systemBaseDirectory = "./build/system"
+    autoUpdate = true
+    prepareForSonarQube = true   
+}
+
+
+
+
+
+

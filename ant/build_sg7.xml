@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="crm-domain-example" default="create-html-report" basedir="..">
+    
+    <!-- modify these properties -->    
+    <property name="version.sonargraph" value="7.2.3"/>
+    <property name="sonargraph.base.dir" location="E:/01_Next/2015-09-21_ARAG-IT/z_SG7_Demo/SG7"/>
+    <property name="sonargraph.library.dir" location="${sonargraph.base.dir}/eclipse/plugins/com.hello2morrow.sonarclipse_${version.sonargraph}"/>
+    
+    <taskdef name="createReportTask" classname="com.hello2morrow.sonargraph.ant.architect.SonargraphArchitectAntTask">
+        <classpath>
+            <fileset dir="${sonargraph.library.dir}" includes="Sonargraph-${version.sonargraph}.jar"/>
+            <fileset dir="${sonargraph.library.dir}/lib" includes="*.jar"/>
+        </classpath>
+    </taskdef>
+
+    <!-- modify these properties -->                   
+    <property name="license.file" location="${user.home}/.hello2morrow/SonargraphArchitect/SonargraphArchitect.license"/>
+    <property name="structure_license.file" location="E:/01_Next/2015-09-21_ARAG-IT/04_licenses/SonargraphArchitect_Structure.license"/>
+    <property name="system.file" value="E:/01_Next/2015-09-21_ARAG-IT/02_projects/Sonargraph7_sample/crm-example-sg7.sonargraph"/>
+    <property name="target.report" location="report"/>
+    <property name="src.html" location="${sonargraph.base.dir}/html"/>
+    <property name="maxmemory-forked" value="64m"/>
+
+    <property name="src" location="src" />
+    <property name="src.config" value="${src}/config" />
+    <property name="src.java" value="${src}/java" />
+    <property name="src.java-test" value="${src}/java-test" />
+    
+    <property name="target" location="target.maven" />
+    <property name="target.cls" location="${target}/cls" />
+    
+    <path id="classpath">
+        <fileset dir="lib" includes="*.jar" />
+    </path>
+    
+    <target name="clean">
+        <delete dir="${target}"/>
+    </target>
+        
+    <target name="compile" depends="clean">
+        <mkdir dir="${target.cls}"/>
+        <javac destdir="${target.cls}" debug="on" failonerror="true">
+            <src path="${src.java}" />
+            <src path="${src.java-test}" />
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+    
+    <target name="create-xml-report">
+        <mkdir dir="${target.report}"/>
+        <createReportTask
+             reportType="xml"
+             license="${license.file}"
+             file="${system.file}"
+             reportDirectory="${target.report}"
+             reportName="sonargraph-report"
+
+             failOnArchitectureViolationsExist = "false"
+             failOnArchitectureWarningsExist = "false"
+             failOnCyclicElementsExist = "false"
+             failOnThresholdViolationsExist = "false"
+             failOnWorkItemsExist = "false"
+             failOnEmptyWorkspace = "false"
+             failOnWorkspaceWarningsExist = "false"
+
+             propertyArchitectureViolationsExist = "architectureViolationsExist"
+             propertyArchitectureWarningsExist = "architectureWarningsExist"
+             propertyCyclicElementsExist = "cyclicElementsExist"
+             propertyThresholdViolationsExist = "thresholdViolationsExist"
+             propertyWorkItemsExist="workItemsExist"
+             propertyEmptyWorkspace="emptyWorkspace"
+             propertyWorkspaceWarningsExist = "workspaceWarningsExist"
+        />
+        <fail message="Architecture violations exist" if="architectureViolationsExist"/>
+        <fail message="Architecture warnings exist" if="architectureWarningsExist"/>
+        <fail message="Cyclic elements exist" if="cyclicElementsExist"/>
+        <fail message="Threshold violations exist" if="thresholdViolationsExist"/>
+        <fail message="Work items exist" if="workItemsExist"/>
+        <fail message="Workspace warnings exist" if="workspaceWarningsExist"/>
+        <fail message="Workspace is empty" if="emptyWorkspace"/>
+    </target>
+    
+    <target name="create-html-report" description="Runs Sonargraph-Architect and creates the HTML report">
+        <mkdir dir="${target.report}"/>
+        <createReportTask
+             reportType="html"
+             license="${license.file}"
+             file="${system.file}"
+             reportDirectory="${target.report}"
+             reportName="sonargraph-report"
+
+             failOnArchitectureViolationsExist = "false"
+             failOnArchitectureWarningsExist = "false"
+             failOnCyclicElementsExist = "false"
+             failOnThresholdViolationsExist = "false"
+             failOnWorkItemsExist = "false"
+             failOnEmptyWorkspace = "false"
+             failOnWorkspaceWarningsExist = "false"
+
+             propertyArchitectureViolationsExist = "architectureViolationsExist"
+             propertyArchitectureWarningsExist = "architectureWarningsExist"
+             propertyCyclicElementsExist = "cyclicElementsExist"
+             propertyThresholdViolationsExist = "thresholdViolationsExist"
+             propertyWorkItemsExist="workItemsExist"
+             propertyEmptyWorkspace="emptyWorkspace"
+             propertyWorkspaceWarningsExist = "workspaceWarningsExist"
+        />
+        <fail message="Architecture violations exist" if="architectureViolationsExist"/>
+        <fail message="Architecture warnings exist" if="architectureWarningsExist"/>
+        <fail message="Cyclic elements exist" if="cyclicElementsExist"/>
+        <fail message="Threshold violations exist" if="thresholdViolationsExist"/>
+        <fail message="Work items exist" if="workItemsExist"/>
+        <fail message="Workspace warnings exist" if="workspaceWarningsExist"/>
+        <fail message="Workspace is empty" if="emptyWorkspace"/>
+    </target>   
+    
+    <target name="create-xml-report-from-paths" depends="compile">
+        <mkdir dir="${target.report}"/>
+        <createReportTask
+             reportType="HTML"
+             license="${license.file}"
+             file="${system.file}"
+             reportDirectory="${target.report}"
+             reportName="sonargraph-report"
+
+             failOnArchitectureViolationsExist = "false"
+             failOnArchitectureWarningsExist = "false"
+             failOnCyclicElementsExist = "false"
+             failOnThresholdViolationsExist = "false"
+             failOnWorkItemsExist = "false"
+             failOnEmptyWorkspace = "false"
+             failOnWorkspaceWarningsExist = "false"
+
+             propertyArchitectureViolationsExist = "architectureViolationsExist"
+             propertyArchitectureWarningsExist = "architectureWarningsExist"
+             propertyCyclicElementsExist = "cyclicElementsExist"
+             propertyThresholdViolationsExist = "thresholdViolationsExist"
+             propertyWorkItemsExist="workItemsExist"
+             propertyEmptyWorkspace="emptyWorkspace"
+             propertyWorkspaceWarningsExist = "workspaceWarningsExist"
+        >
+            <workspacePath>
+                <pathelement location="${src.java}" />
+                <pathelement location="${target.cls}" />
+            </workspacePath>
+        </createReportTask>     
+        
+        <!-- fail message="Architecture violations exist" if="architectureViolationsExist"/>
+        <fail message="Architecture warnings exist" if="architectureWarningsExist"/>
+        <fail message="Cyclic elements exist" if="cyclicElementsExist"/>
+        <fail message="Threshold violations exist" if="thresholdViolationsExist"/>
+        <fail message="Work items exist" if="workItemsExist"/>
+        <fail message="Workspace warnings exist" if="workspaceWarningsExist"/>
+        <fail message="Workspace is empty" if="emptyWorkspace"/ -->
+    </target>
+
+    <target name="create-html-report-forked" description="Runs Sonargraph-Architect and creates the HTML report in its own VM using the specified maxmemory setting">
+        <java fork="true" maxmemory="${maxmemory-forked}" classname="org.apache.tools.ant.Main">
+            <arg line="-buildfile ${ant.file} create-html-report"/>
+            <classpath>
+                <fileset dir="${ant.home}/lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+    
+    <property name="sonar.report" value="sonargraph-report" />
+    <target name="create-xml-report-with-structure-license" depends="compile">
+        <mkdir dir="${target.report}"/>
+        <createReportTask license="${structure_license.file}" 
+            prepareForSonar="true"
+            reportDirectory="${target.report}"
+            reportName="${sonar.report}">
+            <workspacePath>
+                <pathelement location="${src.java}" />
+                <pathelement location="${target.cls}" />
+            </workspacePath>
+        </createReportTask>     
+    </target>
+    
+<!-- SonarQube Integration -->
+<!-- For more details, see http://docs.sonarqube.org/display/SONAR/Analyzing+with+Ant+SonarQube+Task -->
+    <property name="path.target.report" location="${target.report}/${sonar.report}.xml" />
+
+    <!-- Replace directory if necessary -->
+    <property name="sonar.anttask.dir" location="E:/01_Next/2015-09-21_ARAG-IT/03_binaries/SonarQube" />
+    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+        <classpath path="${sonar.anttask.dir}/sonar-ant-task-2.3.jar" />
+    </taskdef>
+    
+    <property name="sonar.projectKey" value="com.hello2morrow:CRM-Example"/>
+    <property name="sonar.projectName" value="CRM" />
+    <property name="sonar.projectVersion" value="0.1-SNAPSHOT" />
+    <property name="sonar.language" value="java" />
+    <property name="sonar.sources" value="${src.java}" />
+    <property name="sonar.binaries" value="${target.cls}" />
+    
+    <property name="sonar.sonargraph.report.path" value="${path.target.report}" />
+
+    <target name="sonar" depends="create-xml-report-with-structure-license">
+        <sonar:sonar xmlns:sonar="antlib:org.sonar.ant"/>
+    </target>
+    
+    <target name="create-xml-report-with-build-license" depends="compile">
+        <mkdir dir="${target.report}"/>
+        <createReportTask license="${license.file}" 
+            file="${system.file}"            
+            reportDirectory="${target.report}"
+            reportName="${sonar.report}"
+            prepareForSonar="true">
+        </createReportTask>     
+    </target>
+    <target name="sonar-with-build-license" depends="create-xml-report-with-build-license">
+        <sonar:sonar xmlns:sonar="antlib:org.sonar.ant"/>
+    </target>
+</project>

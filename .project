@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>crm-domain-example</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.hello2morrow.sonargraph.ide.eclipse.builder</name>
+			<arguments>
+				<dictionary>
+					<key>../crm-demo.sonargraph</key>
+					<value>2022-03-05 09:52:18 +0100</value>
+				</dictionary>
+				<dictionary>
+					<key>../step1_crm-domain-example.sonargraph</key>
+					<value>2019-04-02 15:13:06 +0200</value>
+				</dictionary>
+				<dictionary>
+					<key>../step3_crm-domain-example.sonargraph</key>
+					<value>2022-03-04 11:02:17 +0100</value>
+				</dictionary>
+				<dictionary>
+					<key>../step4_crm-domain-example.sonargraph</key>
+					<value>2022-03-04 11:01:48 +0100</value>
+				</dictionary>
+				<dictionary>
+					<key>../step5_crm-domain-example.sonargraph</key>
+					<value>2022-03-05 09:58:28 +0100</value>
+				</dictionary>
+				<dictionary>
+					<key>../step8_crm-domain-example.sonargraph</key>
+					<value>2022-03-04 11:01:29 +0100</value>
+				</dictionary>
+				<dictionary>
+					<key>../step9_crm-domain-example.sonargraph</key>
+					<value>2020-12-03 17:47:27 +0100</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.hello2morrow.sonargraph.ide.eclipse.nature</nature>
+	</natures>
+</projectDescription>
