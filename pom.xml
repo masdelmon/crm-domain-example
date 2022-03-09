@@ -26,11 +26,11 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>maven-central-repository</id>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>hello2morrow.maven.repository</id>
-			<url>http://maven.hello2morrow.com/repository</url>
+			<url>https://maven.hello2morrow.com/repository</url>
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
