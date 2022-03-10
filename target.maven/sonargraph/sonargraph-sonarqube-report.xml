@@ -812,7 +812,6 @@
 			<issue affectedElement="_ee" id="_140" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.contact.service.PersonDto" line="33"></issue>
 			<issue affectedElement="_11a" id="_141" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.user.service.UserDto" line="21"></issue>
 			<issue affectedElement="_127" id="_142" type="_4a" provider="_49" description="Artifact 'Framework.Business.Domain'" line="35"></issue>
-			<issue affectedElement="_123" id="_144" type="_51" provider="_49" description="Baseline '/home/vagrant/step9_crm-domain-example_2020-11-24_18-42.xml' not found."></issue>
 			<issue affectedElement="_10e" id="_145" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.user.service.ContextDto" line="14"></issue>
 			<issue affectedElement="_ec" id="_146" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.contact.service.AddressDto" line="9"></issue>
 			<issue affectedElement="_ed" id="_147" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.contact.service.AddressDto" line="33"></issue>
