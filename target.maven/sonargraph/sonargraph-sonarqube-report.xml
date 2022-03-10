@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<ns3:report xmlns:ns3="http://www.hello2morrow.com/sonargraph/core/report" xmlns:ns2="http://www.hello2morrow.com/sonargraph/core/export" id="_0" systemId="ee6df0ca7ae86f49238d18fce3851b933" name="step9_crm-domain-example" version="12.0.5.717" systemPath="E:\Download\Sonargraph9_WalkThroughTutorial_Project\step9_crm-domain-example.sonargraph" timestamp="2022-03-05T11:38:03.885+01:00" currentVirtualModel="Modifiable.vm" systemDescription="" analyzerExecutionLevel="full">
+<ns3:report xmlns:ns3="http://www.hello2morrow.com/sonargraph/core/report" xmlns:ns2="http://www.hello2morrow.com/sonargraph/core/export" id="_0" systemId="ee6df0ca7ae86f49238d18fce3851b933" name="step9_crm-domain-example" version="12.0.5.717" systemPath="/var/lib/jenkins/workspace/sonarqube-demo/target.maven/sonargraph" timestamp="2022-03-05T11:38:03.885+01:00" currentVirtualModel="Modifiable.vm" systemDescription="" analyzerExecutionLevel="full">
 	<metaData>
 		<issueProviders>
 			<issueProvider id="_46" name="./Cycles.xml" presentationName="./Cycles.xml"></issueProvider>
@@ -812,7 +812,7 @@
 			<issue affectedElement="_ee" id="_140" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.contact.service.PersonDto" line="33"></issue>
 			<issue affectedElement="_11a" id="_141" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.user.service.UserDto" line="21"></issue>
 			<issue affectedElement="_127" id="_142" type="_4a" provider="_49" description="Artifact 'Framework.Business.Domain'" line="35"></issue>
-			<issue affectedElement="_123" id="_144" type="_51" provider="_49" description="Baseline 'E:\Download\Sonargraph9_WalkThroughTutorial_Project\step9_crm-domain-example.sonargraph\Baselines\step9_crm-domain-example_2020-11-24_18-42.xml' not found."></issue>
+			<issue affectedElement="_123" id="_144" type="_51" provider="_49" description="Baseline '/home/vagrant/step9_crm-domain-example_2020-11-24_18-42.xml' not found."></issue>
 			<issue affectedElement="_10e" id="_145" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.user.service.ContextDto" line="14"></issue>
 			<issue affectedElement="_ec" id="_146" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.contact.service.AddressDto" line="9"></issue>
 			<issue affectedElement="_ed" id="_147" type="_50" provider="_47" description="com.hello2morrow.ddaexample.business.contact.service.AddressDto" line="33"></issue>
